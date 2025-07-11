@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">UI</string>
+    <string name="yes">Yes</string>
+    <string name="add_a_new_account">Add a New Account</string>
+    <string name="Add_a_new_account_to_this_mobile_phone_so_multiple_people_can_use_Karya_to_earn_and_learn">Add a new account to this mobile phone so multiple people can use Karya to earn and learn.</string>
 </resources>
