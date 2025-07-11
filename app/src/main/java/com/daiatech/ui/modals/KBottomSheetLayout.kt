@@ -89,7 +89,7 @@ private fun KBottomsheetLayoutImpl(
     action: (@Composable (Modifier) -> Unit)? = null,
     title: String? = null,
     imgPainter: Painter? = null,
-    paddingValues: Dp = Dimens.M,
+    paddingValues: Dp = Dimens.M
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -133,10 +133,12 @@ private fun KBottomsheetLayoutImpl(
                     )
                 }
                 if (action != null) {
-                    HorizontalDivider(Modifier
-                        .padding(start = 8.dp, end = 8.dp, top = 8.dp)
-                        .fillMaxWidth()
-                        .border(1.dp, Color.LightGray))
+                    HorizontalDivider(
+                        Modifier
+                            .padding(start = 8.dp, end = 8.dp, top = 8.dp)
+                            .fillMaxWidth()
+                            .border(1.dp, Color.LightGray)
+                    )
                     action(modifier)
                 }
             }
@@ -151,7 +153,6 @@ val primaryButtonColors
         disabledContainerColor = primary.copy(0.4f),
         disabledContentColor = onPrimary.copy(0.4f)
     )
-
 
 @Preview
 @Composable
