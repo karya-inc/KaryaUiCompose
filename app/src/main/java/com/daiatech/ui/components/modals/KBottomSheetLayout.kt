@@ -1,4 +1,4 @@
-package com.daiatech.ui.modals
+package com.daiatech.ui.components.modals
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -41,12 +41,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.daiatech.ui.R
-import com.daiatech.ui.ui.theme.Dimens
-import com.daiatech.ui.ui.theme.UITheme
-import com.daiatech.ui.ui.theme.onPrimary
-import com.daiatech.ui.ui.theme.onSecondary
-import com.daiatech.ui.ui.theme.primary
-import com.daiatech.ui.ui.theme.primaryDark
+import com.daiatech.ui.theme.Dimens
+import com.daiatech.ui.theme.UITheme
+import com.daiatech.ui.theme.onPrimary
+import com.daiatech.ui.theme.onSecondary
+import com.daiatech.ui.theme.primary
+import com.daiatech.ui.theme.primaryDark
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
