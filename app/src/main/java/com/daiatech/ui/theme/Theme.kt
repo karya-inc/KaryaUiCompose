@@ -1,4 +1,4 @@
-package com.daiatech.ui.ui.theme
+package com.daiatech.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

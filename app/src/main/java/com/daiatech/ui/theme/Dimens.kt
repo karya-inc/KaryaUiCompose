@@ -1,4 +1,4 @@
-package com.daiatech.ui.ui.theme
+package com.daiatech.ui.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.Dp
