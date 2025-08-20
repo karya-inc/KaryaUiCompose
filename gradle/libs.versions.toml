@@ -10,6 +10,12 @@ activityCompose = "1.10.1"
 composeBom = "2024.09.00"
 ktlint = "11.6.1"
 lottieCompose = "6.5.2"
+appcompat = "1.6.1"
+material = "1.10.0"
+coil-compose = "2.7.0"
+waveform = "0.0.3"
+zoomable = "1.7.0"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -27,10 +33,16 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieCompose" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
+zoomable = { module = "com.mxalbert.zoomable:zoomable", version.ref = "zoomable" }
+karya-waveform = { module = "io.github.karya-inc:waveform", version.ref = "waveform" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 
