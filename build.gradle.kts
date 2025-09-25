@@ -2,9 +2,15 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
-    alias(libs.plugins.kotlin.compose) apply false
+    alias(libs.plugins.composeCompiler) apply false
     alias(libs.plugins.ktlint)
     alias(libs.plugins.android.library) apply false
+
+    alias(libs.plugins.composeHotReload) apply false
+    alias(libs.plugins.composeMultiplatform) apply false
+    alias(libs.plugins.kotlinMultiplatform) apply false
+    alias(libs.plugins.androidLint) apply false
+    alias(libs.plugins.androidKotlinMultiplatformLibrary) apply false
 }
 
 allprojects {
@@ -12,6 +18,5 @@ allprojects {
     // Optionally configure plugin
     configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
         debug.set(true)
-        disabledRules.set(listOf("no-wildcard-imports", "filename", "enum-entry-name-case"))
     }
 }
