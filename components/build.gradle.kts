@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
+    id("maven-publish")
+    id("com.vanniktech.maven.publish") version "0.34.0"
 }
 
 kotlin {
@@ -66,15 +68,44 @@ compose.resources {
     generateResClass = auto
 }
 
-kotlin {
-    targets.configureEach {
-        compilations.configureEach {
-            compilerOptions.configure {
-                freeCompilerArgs.addAll(
-                    "-P",
-                    "plugin:androidx.compose.compiler.plugins.kotlin:generateFunctionKeyMetaAnnotations=true",
-                )
+group = "io.github.karya-inc"
+version = "0.0.0"
+
+mavenPublishing {
+    val artifactId = "karya-ui"
+    publishToMavenCentral(true)
+    signAllPublications()
+
+    coordinates(
+        groupId = group.toString(),
+        artifactId = artifactId,
+        version = version.toString()
+    )
+
+    pom {
+        name.set(artifactId)
+        description.set("Compose multiplatform Karua-UI library")
+        url.set("https://github.com/karya-inc/KaryaUi-CMP.git")
+
+        licenses {
+            license {
+                name.set("GNU license")
+                url.set("https://opensource.org/license/gpl-3-0")
             }
+        }
+
+        developers {
+            developer {
+                id.set("divyansh@karya.in")
+                name.set("Divyansh Kushwaha")
+                email.set("divyansh@karya.in")
+            }
+        }
+
+        scm {
+            connection.set("scm:git:ssh://git@github.com/karya-inc/KaryaUi-CMP.git")
+            developerConnection.set("scm:git:ssh://git@github.com/karya-inc/KaryaUi-CMP.git")
+            url.set("https://github.com/karya-inc/KaryaUi-CMP.git")
         }
     }
 }
