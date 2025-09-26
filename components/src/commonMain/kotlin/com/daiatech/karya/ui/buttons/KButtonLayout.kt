@@ -1,4 +1,4 @@
-package com.daiatech.app.ui.components.buttons
+package com.daiatech.karya.ui.buttons
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -13,7 +13,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.daiatech.karya.ui.buttons.ButtonVariation
 
 @Composable
 fun KButtonLayout(

@@ -1,4 +1,4 @@
-package com.daiatech.app.ui.components.buttons
+package com.daiatech.karya.ui.buttons
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background

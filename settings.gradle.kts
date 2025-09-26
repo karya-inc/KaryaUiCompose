@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Karya-UI"
+rootProject.name = "KaryaUi-CMP"
 include(":app")
 include(":components")

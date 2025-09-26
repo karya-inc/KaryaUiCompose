@@ -16,7 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
-import com.daiatech.app.ui.components.buttons.KButtonLayout
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
