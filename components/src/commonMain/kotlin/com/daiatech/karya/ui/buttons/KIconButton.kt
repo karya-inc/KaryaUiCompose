@@ -25,8 +25,6 @@ fun KIconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    shape: Shape = RoundedCornerShape(8.dp),
-    colors: IconButtonColors? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     buttonVariation: ButtonVariation = ButtonVariation.TertiaryButtonRegular,
     content: @Composable () -> Unit,
