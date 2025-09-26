@@ -69,7 +69,7 @@ compose.resources {
 }
 
 group = "io.github.karya-inc"
-version = "0.0.1"
+version = "0.0.2"
 
 mavenPublishing {
     val artifactId = "karya-ui"
