@@ -4,6 +4,7 @@
 package com.daiatech.app.ui.components.textfields
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -36,7 +37,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.daiatech.app.ui.theme.UITheme
+import com.daiatech.app.ui.theme.errorColor
 import com.daiatech.app.ui.theme.neutral3
+import com.daiatech.app.ui.theme.primaryDark
 
 @Composable
 fun TextInputField(
@@ -55,15 +58,9 @@ fun TextInputField(
     blankInputErrorMessage: String = "Blank inputs are not allowed!",
     focusRequester: FocusRequester = remember { FocusRequester() },
     enabled: Boolean = true,
-    colors: TextFieldColors = OutlinedTextFieldDefaults.colors(
-        focusedContainerColor = Color.White,
-        unfocusedContainerColor = Color.White,
-        errorContainerColor = Color.White,
-        disabledContainerColor = Color.White
-    ),
     placeholder: @Composable () -> Unit = {},
     shape: Shape = RoundedCornerShape(8.dp),
-    supportingText: @Composable () -> Unit = {},
+    supportingText: (@Composable () -> Unit)? = null,
     singleLine: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
     keyboardActions: KeyboardActions? = null,
@@ -109,8 +106,7 @@ fun TextInputField(
                 IconButton(
                     onClick = { onValueChange("") },
                     enabled = enabled,
-                    modifier = Modifier.offset(x = (-8).dp),
-                    colors = IconButtonDefaults.iconButtonColors(disabledContentColor = neutral3)
+                    modifier = Modifier.offset(x = (-8).dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.Clear,
@@ -122,17 +118,42 @@ fun TextInputField(
         },
         placeholder = placeholder,
         supportingText = {
-            if (supportingText != {}) {
-                supportingText()
+            Column {
+                if (supportingText != null) {
+                    supportingText()
+                }
+                if (!errorMessage.isNullOrBlank()) {
+                    Text(
+                        text = errorMessage,
+                        modifier = Modifier.padding(start = 10.dp, top = 1.dp),
+                        color = errorColor
+                    )
+                }
             }
-            Text(
-                text = errorMessage ?: "",
-                modifier = Modifier.padding(start = 10.dp, top = 1.dp)
-            )
         },
         shape = shape,
         enabled = enabled,
-        colors = colors,
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedContainerColor = Color.White,
+            focusedBorderColor = primaryDark,
+            focusedLabelColor = primaryDark,
+            unfocusedContainerColor = Color.White,
+            unfocusedBorderColor = Color.Black,
+            unfocusedLabelColor = Color.Black,
+            disabledContainerColor = Color.White.copy(alpha = 0.5f),
+            disabledBorderColor = Color.Black.copy(alpha = 0.5f),
+            disabledTextColor = Color.Black.copy(alpha = 0.5f),
+            disabledSupportingTextColor = Color.Black.copy(alpha = 0.5f),
+            disabledLeadingIconColor = Color.Black.copy(alpha = 0.5f),
+            disabledTrailingIconColor = Color.Black.copy(alpha = 0.5f),
+            disabledLabelColor = Color.Black.copy(alpha = 0.5f),
+            errorContainerColor = Color.White,
+            errorBorderColor = errorColor,
+            errorTextColor = Color.Black,
+            errorLeadingIconColor = Color.Black,
+            errorTrailingIconColor = Color.Black,
+            errorLabelColor = errorColor
+        ),
         visualTransformation = visualTransformation
     )
 }
