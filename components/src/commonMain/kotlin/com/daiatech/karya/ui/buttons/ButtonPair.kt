@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
 import com.daiatech.karya.ui.spacers.VerticalSpacer
+import com.daiatech.karya.ui.theme.Dimens
 import com.daiatech.karya.ui.theme.KaryaTheme
 import com.daiatech.karya.ui.theme.backgroundDark
 import com.daiatech.karya.ui.theme.errorColor

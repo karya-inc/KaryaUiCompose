@@ -84,7 +84,7 @@ mavenPublishing {
 
     pom {
         name.set(artifactId)
-        description.set("Compose multiplatform Karua-UI library")
+        description.set("Compose multiplatform Karya-UI library")
         url.set("https://github.com/karya-inc/KaryaUi-CMP.git")
 
         licenses {
