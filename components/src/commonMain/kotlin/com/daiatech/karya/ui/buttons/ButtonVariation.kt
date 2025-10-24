@@ -140,26 +140,24 @@ sealed class ButtonVariation(
     data object IconErrorButtonRegular : ButtonVariation(
         colors =
             ButtonColors(
-                containerColor = Color(0XFFFFFFFF),
-                contentColor = Color(0XFFDE3730),
-                disabledContainerColor = Color(0XFFFFFFFF).copy(alpha = 0.5f),
-                disabledContentColor = Color(0XFFDE3730).copy(alpha = 0.5f),
+                containerColor = Color(0XFFDE3730),
+                contentColor = Color(0xFFFFFFFF),
+                disabledContainerColor = Color(0XFFDE3730).copy(alpha = 0.5f),
+                disabledContentColor = Color(0xFFFFFFFF).copy(alpha = 0.5f),
             ),
         buttonSize = ButtonSize.REGULAR,
-        borderColor = BorderStroke(8.dp, Color(0XFFDE3730)),
         textStyle = ButtonTextStyle.REGULAR,
     )
 
     data object IconPrimaryButtonRegular : ButtonVariation(
         colors =
             ButtonColors(
-                containerColor = Color(0XFFFFFFFF),
-                contentColor = Color(0xFF008857),
-                disabledContainerColor = Color(0XFFFFFFFF).copy(alpha = 0.5f),
-                disabledContentColor = Color(0xFF008857).copy(alpha = 0.5f),
+                containerColor = Color(0XFF008857),
+                contentColor = Color(0xFFFFFFFF),
+                disabledContainerColor = Color(0XFF008857).copy(alpha = 0.5f),
+                disabledContentColor = Color(0xFFFFFFFF),
             ),
         buttonSize = ButtonSize.REGULAR,
-        borderColor = BorderStroke(8.dp, primaryDark),
         textStyle = ButtonTextStyle.REGULAR,
     )
 
@@ -191,26 +189,24 @@ sealed class ButtonVariation(
     data object IconErrorButtonSmall : ButtonVariation(
         colors =
             ButtonColors(
-                containerColor = Color(0XFFFFFFFF),
-                contentColor = Color(0XFFDE3730),
-                disabledContainerColor = Color(0XFFFFFFFF).copy(alpha = 0.5f),
-                disabledContentColor = Color(0XFFDE3730).copy(alpha = 0.5f),
+                containerColor = Color(0XFFDE3730),
+                contentColor = Color(0xFFFFFFFF),
+                disabledContainerColor = Color(0XFFDE3730).copy(alpha = 0.5f),
+                disabledContentColor = Color(0xFFFFFFFF).copy(alpha = 0.5f),
             ),
         buttonSize = ButtonSize.SMALL,
-        borderColor = BorderStroke(4.dp, Color(0XFFDE3730)),
         textStyle = ButtonTextStyle.REGULAR,
     )
 
     data object IconPrimaryButtonSmall : ButtonVariation(
         colors =
             ButtonColors(
-                containerColor = Color(0XFFFFFFFF),
-                contentColor = Color(0xFF008857),
-                disabledContainerColor = Color(0XFFFFFFFF).copy(alpha = 0.5f),
-                disabledContentColor = Color(0xFF008857).copy(alpha = 0.5f),
+                containerColor = Color(0XFF008857),
+                contentColor = Color(0xFFFFFFFF),
+                disabledContainerColor = Color(0XFF008857).copy(alpha = 0.5f),
+                disabledContentColor = Color(0xFFFFFFFF),
             ),
         buttonSize = ButtonSize.SMALL,
-        borderColor = BorderStroke(4.dp, primaryDark),
         textStyle = ButtonTextStyle.REGULAR,
     )
 
