@@ -243,7 +243,7 @@ private fun rememberButtonVariant(
         val borderColor = when (colorScheme) {
             ButtonColorScheme.Primary -> currentColorScheme.primary50
             ButtonColorScheme.Secondary -> currentColorScheme.primary50
-            ButtonColorScheme.Tertiary -> currentColorScheme.primary50
+            ButtonColorScheme.Tertiary -> Color.Transparent
             ButtonColorScheme.Error -> currentColorScheme.error50
             ButtonColorScheme.AccentOutline -> currentColorScheme.tertiary50
             ButtonColorScheme.AccentFill -> currentColorScheme.tertiary50
@@ -290,7 +290,7 @@ private fun rememberIconButtonVariant(
         val borderColor = when (colorScheme) {
             ButtonColorScheme.Primary -> currentColorScheme.primary50
             ButtonColorScheme.Secondary -> currentColorScheme.primary50
-            ButtonColorScheme.Tertiary -> currentColorScheme.primary50
+            ButtonColorScheme.Tertiary -> Color.Transparent
             ButtonColorScheme.Error -> currentColorScheme.error50
             ButtonColorScheme.AccentOutline -> currentColorScheme.tertiary50
             ButtonColorScheme.AccentFill -> currentColorScheme.tertiary50
@@ -328,9 +328,9 @@ private fun rememberButtonColors(colorScheme: ButtonColorScheme): ButtonColors {
                 disabledContentColor = theme.primary50.copy(alpha = 0.5f),
             )
             ButtonColorScheme.Tertiary -> ButtonColors(
-                containerColor = theme.neutral100,
+                containerColor = Color.Transparent,
                 contentColor = theme.primary50,
-                disabledContainerColor = theme.neutral100.copy(alpha = 0.5f),
+                disabledContainerColor = Color.Transparent,
                 disabledContentColor = theme.primary50.copy(alpha = 0.5f),
             )
             ButtonColorScheme.Error -> ButtonColors(
