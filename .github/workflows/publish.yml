@@ -51,7 +51,7 @@ jobs:
       - name: Grant Execute Permission to Gradlew
         run: chmod +x gradlew
 
-      - name: Build Signed APK and AAB
+      - name: Build Signed APK
         run: |
           ./gradlew :composeApp:assembleRelease \
           -Pandroid.injected.signing.store.file=${{ github.workspace }}/composeApp/release.keystore \
@@ -59,11 +59,11 @@ jobs:
           -Pandroid.injected.signing.key.alias=${{ secrets.ANDROID_KEY_ALIAS }} \
           -Pandroid.injected.signing.key.password=${{ secrets.ANDROID_KEY_PASSWORD }}
 
-      - name: Find APK and AAB
+      - name: Find APK
         run: |
           APK_PATH=$(find "${{ github.workspace }}/composeApp/build/outputs/apk/release" -name "*.apk" | head -n 1)
-          if [ -z "$APK_PATH" ] || [ -z "$AAB_PATH" ]; then
-              echo "❌ APK or AAB not found! Release failed."
+          if [ -z "$APK_PATH" ]; then
+              echo "❌ APK not found! Release failed."
               exit 1
           else
               echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
