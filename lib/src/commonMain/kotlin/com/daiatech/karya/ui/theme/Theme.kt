@@ -72,16 +72,3 @@ private val darkColorScheme =
         outlineVariant = md_theme_dark_outlineVariant,
         scrim = md_theme_dark_scrim,
     )
-
-@Composable
-fun KaryaTheme(
-    useDarkTheme: Boolean = false,
-    content: @Composable () -> Unit,
-) {
-    val colors = if (!useDarkTheme) lightColorScheme else darkColorScheme
-    MaterialTheme(
-        colorScheme = colors,
-        content = content,
-        typography = defaultTypography,
-    )
-}

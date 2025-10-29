@@ -1,20 +1,27 @@
 package com.daiatech.karya.ui.buttons
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountTree
-import androidx.compose.material3.Icon
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -24,230 +31,137 @@ fun KButton(
     content: String? = null,
     leftIcon: Painter? = null,
     rightIcon: Painter? = null,
-    buttonVariation: ButtonVariation,
-    isEnabled: Boolean = true,
+    variant: ButtonVariant,
+    enabled: Boolean = true,
     onClick: () -> Unit,
 ) {
     KButtonLayout(
         modifier = modifier,
-        content = {
-            if (content != null) {
+        content = content?.let { text ->
+            {
                 Text(
-                    text = content,
-                    style =
-                        when (buttonVariation.textStyle) {
-                            ButtonTextStyle.SMALL -> MaterialTheme.typography.labelMedium
-                            ButtonTextStyle.REGULAR -> MaterialTheme.typography.labelLarge
-                        },
+                    text = text,
+                    style = variant.textStyle
                 )
             }
         },
-        leftIcon = {
-            if (leftIcon != null) {
-                Icon(
-                    painter = leftIcon,
-                    contentDescription = "left image",
-                    modifier = Modifier.size(16.dp),
+        leftIcon = leftIcon?.let { icon ->
+            {
+                Image(
+                    painter = icon,
+                    contentDescription = content,
+                    modifier = Modifier.size(variant.iconSize),
                 )
             }
         },
-        rightIcon = {
-            if (rightIcon != null) {
-                Icon(
-                    painter = rightIcon,
-                    contentDescription = "right image",
-                    modifier = Modifier.size(16.dp),
+        rightIcon = rightIcon?.let { icon ->
+            {
+                Image(
+                    painter = icon,
+                    contentDescription = content,
+                    modifier = Modifier.size(variant.iconSize),
                 )
             }
         },
-        buttonVariation = buttonVariation,
-        isEnabled = isEnabled,
+        variant = variant,
+        enabled = enabled,
         onClick = onClick,
     )
 }
 
-@Preview
+
+/**
+ * Reusable button layout component that applies a ButtonVariant configuration.
+ *
+ * @param modifier Modifier to be applied to the button
+ * @param content Main button content, typically a Text composable
+ * @param leftIcon Optional icon to display before the content
+ * @param rightIcon Optional icon to display after the content
+ * @param variant ButtonVariant configuration that defines the button's appearance
+ * @param interactionSource MutableInteractionSource for handling user interactions (press, hover, etc.)
+ * @param enabled Whether the button is enabled or disabled
+ * @param onClick Callback invoked when the button is clicked
+ */
 @Composable
-private fun KButtonEnablePrev() {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        modifier =
-            Modifier
-                .background(Color.White)
-                .padding(8.dp),
+internal fun KButtonLayout(
+    modifier: Modifier = Modifier,
+    content: (@Composable () -> Unit)? = null,
+    leftIcon: (@Composable () -> Unit)? = null,
+    rightIcon: (@Composable () -> Unit)? = null,
+    variant: ButtonVariant,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    enabled: Boolean = true,
+    onClick: () -> Unit
+) {
+    Button(
+        modifier = modifier,
+        onClick = { onClick() },
+        enabled = enabled,
+        shape = variant.shape,
+        colors = variant.colors,
+        border = BorderStroke(1.dp, variant.borderColor),
+        contentPadding = variant.paddingValues,
+        interactionSource = interactionSource,
     ) {
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.PrimaryButtonRegular,
-            isEnabled = true,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.PrimaryButtonSmall,
-            isEnabled = true,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.SecondaryButtonSmall,
-            isEnabled = true,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.SecondaryButtonRegular,
-            isEnabled = true,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.ErrorButtonSmall,
-            isEnabled = true,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.ErrorButtonRegular,
-            isEnabled = true,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.TertiaryButtonRegular,
-            isEnabled = true,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.AccentOutlineRegular,
-            isEnabled = true,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.AccentFillRegular,
-            isEnabled = true,
-            onClick = {},
-        )
+        Row(
+            modifier = Modifier.height(variant.iconSize),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(variant.itemSpacing),
+        ) {
+            leftIcon?.invoke()
+            content?.invoke()
+            rightIcon?.invoke()
+        }
     }
 }
 
-@Preview
+@Preview()
 @Composable
-private fun KButtonDisablePrev() {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        modifier =
-            Modifier
-                .background(Color.White)
-                .padding(8.dp),
+fun KButtonPreview() {
+    val buttonVariants = listOf(
+        "Primary Small" to ButtonVariants.primarySmall,
+        "Primary Regular" to ButtonVariants.primaryRegular,
+        "Secondary Small" to ButtonVariants.secondarySmall,
+        "Secondary Regular" to ButtonVariants.secondaryRegular,
+        "Tertiary Small" to ButtonVariants.tertiarySmall,
+        "Tertiary Regular" to ButtonVariants.tertiaryRegular,
+        "Error Small" to ButtonVariants.errorSmall,
+        "Error Regular" to ButtonVariants.errorRegular,
+        "Accent Outline Small" to ButtonVariants.accentOutlineSmall,
+        "Accent Outline Regular" to ButtonVariants.accentOutlineRegular,
+        "Accent Fill Small" to ButtonVariants.accentFillSmall,
+        "Accent Fill Regular" to ButtonVariants.accentFillRegular,
+    )
+
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        contentPadding = PaddingValues(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.PrimaryButtonRegular,
-            isEnabled = false,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.PrimaryButtonSmall,
-            isEnabled = false,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.SecondaryButtonSmall,
-            isEnabled = false,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.SecondaryButtonRegular,
-            isEnabled = false,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.ErrorButtonSmall,
-            isEnabled = false,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.ErrorButtonRegular,
-            isEnabled = false,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.TertiaryButtonRegular,
-            isEnabled = false,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.AccentOutlineRegular,
-            isEnabled = false,
-            onClick = {},
-        )
-
-        KButton(
-            content = "Click Here",
-            leftIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            rightIcon = rememberVectorPainter(Icons.Default.AccountTree),
-            buttonVariation = ButtonVariation.AccentFillRegular,
-            isEnabled = false,
-            onClick = {},
-        )
+        items(buttonVariants) { (label, variant) ->
+            Column(
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = label,
+                    style = MaterialTheme.typography.labelSmall,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+                KButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    content = "Enabled",
+                    variant = variant,
+                    onClick = {}
+                )
+                KButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    content = "Disabled",
+                    variant = variant,
+                    enabled = false,
+                    onClick = {}
+                )
+            }
+        }
     }
 }

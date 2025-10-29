@@ -1,167 +1,108 @@
 package com.daiatech.karya.ui.buttons
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.IconButtonColors
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
-import com.daiatech.karya.ui.theme.KaryaTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun KIconButton(
-    onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    painter: Painter,
+    variant: IconButtonVariant,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    buttonVariation: ButtonVariation = ButtonVariation.TertiaryButtonRegular,
-    content: @Composable () -> Unit,
+    onClick: () -> Unit,
 ) {
-    KButtonLayout(
-        modifier = modifier.width(buttonVariation.buttonSize.value),
-        leftIcon = {
-            Box(
-                modifier = Modifier.size(24.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                content()
-            }
-        },
-        buttonVariation = buttonVariation,
-        isEnabled = enabled,
-        onClick = onClick,
+    Button(
+        modifier = modifier,
+        onClick = { onClick() },
+        enabled = enabled,
+        shape = variant.shape,
+        colors = variant.colors,
+        border = BorderStroke(1.dp, variant.borderColor),
+        contentPadding = variant.paddingValues,
         interactionSource = interactionSource,
-        contentPaddingValues = PaddingValues(0.dp),
+    ) {
+        Image(
+            painter = painter,
+            contentDescription = null,
+            modifier = Modifier.size(variant.iconSize)
+        )
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun IconButtonPreview() {
+    val iconButtonVariants = listOf(
+        "Primary Small" to IconButtonVariants.primarySmall,
+        "Primary Regular" to IconButtonVariants.primaryRegular,
+        "Secondary Small" to IconButtonVariants.secondarySmall,
+        "Secondary Regular" to IconButtonVariants.secondaryRegular,
+        "Tertiary Small" to IconButtonVariants.tertiarySmall,
+        "Tertiary Regular" to IconButtonVariants.tertiaryRegular,
+        "Error Small" to IconButtonVariants.errorSmall,
+        "Error Regular" to IconButtonVariants.errorRegular,
+        "Accent Outline Small" to IconButtonVariants.accentOutlineSmall,
+        "Accent Outline Regular" to IconButtonVariants.accentOutlineRegular,
+        "Accent Fill Small" to IconButtonVariants.accentFillSmall,
+        "Accent Fill Regular" to IconButtonVariants.accentFillRegular,
     )
-}
 
-@Preview
-@Composable
-fun KIconButtonPrev() {
-    KaryaTheme {
-        Column {
-            KIconButton(buttonVariation = ButtonVariation.IconPrimaryButtonRegular, onClick = { }) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
-            }
-            KIconButton(onClick = { }, enabled = false, buttonVariation = ButtonVariation.IconPrimaryButtonRegular) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
-            }
-        }
-    }
-}
-
-@Preview
-@Composable
-fun KIconButtonPrev1() {
-    KaryaTheme {
-        Column {
-            KIconButton(buttonVariation = ButtonVariation.IconSecondaryButtonRegular, onClick = { }) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
-            }
-            KIconButton(onClick = { }, enabled = false, buttonVariation = ButtonVariation.IconSecondaryButtonRegular) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
-            }
-        }
-    }
-}
-
-@Preview
-@Composable
-fun KIconButtonPrev2() {
-    KaryaTheme {
-        Column {
-            KIconButton(buttonVariation = ButtonVariation.IconErrorButtonRegular, onClick = { }) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
-            }
-            KIconButton(onClick = { }, enabled = false, buttonVariation = ButtonVariation.IconErrorButtonRegular) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
-            }
-        }
-    }
-}
-
-@Preview
-@Composable
-fun KIconButtonPrev3() {
-    KaryaTheme {
-        Column {
-            KIconButton(buttonVariation = ButtonVariation.IconTertiaryButtonRegular, onClick = { }) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
-            }
-            KIconButton(onClick = { }, enabled = false, buttonVariation = ButtonVariation.IconTertiaryButtonRegular) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
-            }
-        }
-    }
-}
-
-@Preview
-@Composable
-fun KIconButtonSmallPrev() {
-    KaryaTheme {
-        Column {
-            KIconButton(buttonVariation = ButtonVariation.IconPrimaryButtonSmall, onClick = { }) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
-            }
-            KIconButton(onClick = { }, enabled = false, buttonVariation = ButtonVariation.IconPrimaryButtonSmall) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
-            }
-        }
-    }
-}
-
-@Preview
-@Composable
-fun KIconButtonSmallPrev1() {
-    KaryaTheme {
-        Column {
-            KIconButton(buttonVariation = ButtonVariation.IconSecondaryButtonSmall, onClick = { }) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
-            }
-            KIconButton(onClick = { }, enabled = false, buttonVariation = ButtonVariation.IconSecondaryButtonSmall) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
-            }
-        }
-    }
-}
-
-@Preview
-@Composable
-fun KIconButtonSmallPrev2() {
-    KaryaTheme {
-        Column {
-            KIconButton(buttonVariation = ButtonVariation.IconErrorButtonSmall, onClick = { }) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
-            }
-            KIconButton(onClick = { }, enabled = false, buttonVariation = ButtonVariation.IconErrorButtonSmall) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
-            }
-        }
-    }
-}
-
-@Preview
-@Composable
-fun KIconButtonSmallPrev3() {
-    KaryaTheme {
-        Column {
-            KIconButton(buttonVariation = ButtonVariation.IconTertiaryButtonSmall, onClick = { }) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
-            }
-            KIconButton(onClick = { }, enabled = false, buttonVariation = ButtonVariation.IconTertiaryButtonSmall) {
-                Image(imageVector = Icons.Default.Person, contentDescription = null)
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        contentPadding = PaddingValues(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        items(iconButtonVariants) { (label, variant) ->
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = label,
+                    style = MaterialTheme.typography.labelSmall,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    KIconButton(
+                        painter = rememberVectorPainter(Icons.Default.Add),
+                        variant = variant,
+                        onClick = {}
+                    )
+                    KIconButton(
+                        painter = rememberVectorPainter(Icons.Default.Add),
+                        variant = variant,
+                        enabled = false,
+                        onClick = {}
+                    )
+                }
             }
         }
     }
