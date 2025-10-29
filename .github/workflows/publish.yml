@@ -61,7 +61,7 @@ jobs:
 
       - name: Find APK and AAB
         run: |
-          APK_PATH=$(find "{{ github.workspace }}/composeApp/build/outputs/apk/release" -name "*.apk" | head -n 1)
+          APK_PATH=$(find "${{ github.workspace }}/composeApp/build/outputs/apk/release" -name "*.apk" | head -n 1)
           if [ -z "$APK_PATH" ] || [ -z "$AAB_PATH" ]; then
               echo "❌ APK or AAB not found! Release failed."
               exit 1
