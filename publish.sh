@@ -13,7 +13,7 @@ echo "Current branch: $current_branch"
 git checkout main
 git pull origin main
 
-current_version=$(sed -En 's/.*version = "([0-9]+\.[0-9]+\.[0-9]+)"/\1/p' components/build.gradle.kts)
+current_version=$(sed -En 's/.*version = "([0-9]+\.[0-9]+\.[0-9]+)"/\1/p' lib/build.gradle.kts)
 echo "Current version: $current_version"
 
 IFS='.' read -r major minor patch <<< "$current_version"
@@ -33,10 +33,10 @@ fi
 new_version="${major}.${minor}.${patch}"
 echo "New version: $new_version"
 
-sed -i.bak "s/version = \"$current_version\"/version = \"$new_version\"/g" components/build.gradle.kts
-rm components/build.gradle.kts.bak
+sed -i.bak "s/version = \"$current_version\"/version = \"$new_version\"/g" lib/build.gradle.kts
+rm lib/build.gradle.kts.bak
 
-git add components/build.gradle.kts
+git add lib/build.gradle.kts
 git commit -m "release: bump up version"
 
 git tag "v$new_version"
