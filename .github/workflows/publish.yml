@@ -1,4 +1,4 @@
-name: Publish to MavenCentral
+name: Create Release and Publish to MavenCentral
 
 on:
   push:
