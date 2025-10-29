@@ -17,3 +17,4 @@ local.properties
 package-lock.json
 
 .kotlin
+.idea

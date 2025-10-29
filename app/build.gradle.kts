@@ -52,5 +52,5 @@ dependencies {
     implementation(libs.androidx.material.icons)
     debugImplementation(libs.androidx.ui.tooling)
     implementation(libs.lottie.compose)
-    implementation(project(":components"))
+    implementation(project(":lib"))
 }
