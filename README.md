@@ -2,15 +2,15 @@
 
 A modern Compose Multiplatform UI library providing Karya-specific components for building beautiful, consistent user interfaces across Android, iOS, Desktop, and Web platforms.
 
-## ✨ Features
+## Features
 
-- 🎯 **Karya-specific UI components** - Tailored components for Karya applications
-- 🌐 **Multiplatform support** - Works on Android, iOS, Desktop, and Web
-- 🎨 **Modern design system** - Consistent styling and theming
-- 📱 **Compose-based** - Built with Jetpack Compose and Compose Multiplatform
-- 🔧 **Easy integration** - Simple setup with Maven Central distribution
+- **Karya-specific UI components** - Tailored components for Karya applications
+- **Multiplatform support** - Works on Android, iOS, Desktop, and Web
+- **Modern design system** - Consistent styling and theming
+- **Compose-based** - Built with Jetpack Compose and Compose Multiplatform
+- **Easy integration** - Simple setup with Maven Central distribution
 
-## 🚀 Installation
+## Installation
 
 ### Gradle (Kotlin DSL)
 
@@ -50,7 +50,7 @@ dependencies {
 </dependency>
 ```
 
-## 🎯 Platform Support
+## Platform Support
 
 | Platform | Status |
 |----------|--------|
@@ -59,11 +59,7 @@ dependencies {
 | Desktop  | ✅ Supported |
 | Web      | ✅ Supported |
 
-## 📖 Documentation
-
-For detailed documentation and examples, visit our [Documentation Site](https://karya-inc.github.io/KaryaUi-CMP).
-
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
@@ -73,25 +69,14 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
-## 👥 Authors
-
-- **Divyansh Kushwaha** - [divyansh@karya.in](mailto:divyansh@karya.in)
-- **Akshita Tiwary** - [akshita.tiwary@karya.in](mailto:akshita.tiwary@karya.in)
-
-## 🔗 Links
-
-- [GitHub Repository](https://github.com/karya-inc/KaryaUi-CMP)
+## Links
 - [Maven Central](https://central.sonatype.com/artifact/io.github.karya-inc/karya-ui)
 - [Issues](https://github.com/karya-inc/KaryaUi-CMP/issues)
 - [Releases](https://github.com/karya-inc/KaryaUi-CMP/releases)
-
-## 🏢 About Karya
-
-KaryaUi-CMP is developed by Karya., dedicated to creating innovative solutions and tools for modern application development.
 
 ---
 
