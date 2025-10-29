@@ -1,4 +1,4 @@
-# KaryaUi-CMP 🎨
+# KaryaUi Compose 🎨
 
 A modern Compose Multiplatform UI library providing Karya-specific components for building beautiful, consistent user interfaces across Android, iOS, Desktop, and Web platforms.
 
