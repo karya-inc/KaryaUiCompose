@@ -1,6 +1,7 @@
 package com.daiatech.karya.ui.theme
 
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -13,13 +14,12 @@ internal val LocalTypography = staticCompositionLocalOf { Typography() }
 internal val LocalKaryaShapes = staticCompositionLocalOf { defaultKaryaShapes }
 
 object KaryaTheme {
-    val colors: KaryaColorScheme
+    val colorScheme: KaryaColorScheme
         @Composable get() = LocalColorScheme.current
 
     val dimens: KaryaDimensions
         @Composable get() = LocalDimens.current
 
-    // TODO: Implement our own typography
     val typography: Typography
         @Composable get() = LocalTypography.current
 
@@ -36,6 +36,7 @@ fun KaryaTheme(
     content: @Composable () -> Unit
 ) {
 
+    MaterialTheme
     CompositionLocalProvider(
         LocalColorScheme provides colors,
         LocalDimens provides dimens,
