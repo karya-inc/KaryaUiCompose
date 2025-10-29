@@ -8,9 +8,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.daiatech.karya.ui.screens.Component
 import com.daiatech.karya.ui.screens.ComponentScreen
 import com.daiatech.karya.ui.screens.HomeScreen
+import com.daiatech.karya.ui.screens.SettingsScreen
 
 @Composable
 fun App(
@@ -31,9 +31,17 @@ fun App(
             )
         }
 
-        Component.entries.forEach {
-            composable(it.route) {
-                ComponentScreen(Component.BUTTONS) { navController.navigateUp() }
+        composable("settings") {
+            SettingsScreen { navController.navigateUp() }
+        }
+
+        Components.entries.forEach { component ->
+            composable(component.route) {
+                ComponentScreen(
+                    component = component,
+                    navigateToSettings = { navController.navigate("settings") },
+                    navigateUp = { navController.navigateUp() },
+                )
             }
         }
     }

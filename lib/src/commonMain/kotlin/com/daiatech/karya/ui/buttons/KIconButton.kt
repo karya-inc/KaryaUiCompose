@@ -56,7 +56,7 @@ fun KIconButton(
 
 @Preview(showBackground = true)
 @Composable
-fun IconButtonPreview() {
+fun KIconButtonPreview() {
     val iconButtonVariants = listOf(
         "Primary Small" to IconButtonVariants.primarySmall,
         "Primary Regular" to IconButtonVariants.primaryRegular,

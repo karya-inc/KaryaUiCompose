@@ -16,6 +16,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.daiatech.karya.ui.Components
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
@@ -23,7 +24,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 @Composable
 fun HomeScreen(
-    onNavigateToComponent: (Component) -> Unit = {}
+    onNavigateToComponent: (Components) -> Unit = {}
 ) {
     Scaffold(
         topBar = { MediumTopAppBar(title = { Text("Karya Component Catalogue") }) }
@@ -31,7 +32,7 @@ fun HomeScreen(
         LazyColumn(
             modifier = Modifier.fillMaxSize().padding(paddingValues)
         ) {
-            items(Component.entries) { item ->
+            items(Components.entries) { item ->
                 ListItem(
                     headlineContent = { Text(item.value) },
                     supportingContent = { Text("Tap to view ${item.value} catalogue") },
