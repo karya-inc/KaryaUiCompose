@@ -20,6 +20,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "KaryaUiCompose"
-include(":app")
 include(":composeApp")
 include(":lib")
