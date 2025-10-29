@@ -58,7 +58,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.daiatech.karya.ui"
+    namespace = "com.daiatech.karya.ui.app"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
