@@ -49,6 +49,10 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose.cmp)
             implementation(libs.androidx.lifecycle.runtimeCompose.cmp)
+
+            implementation("org.jetbrains.androidx.navigation:navigation-compose:2.9.1")
+
+            implementation(project(":lib"))
         }
     }
 }
