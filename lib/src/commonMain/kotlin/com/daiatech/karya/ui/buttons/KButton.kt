@@ -15,67 +15,21 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
-@Composable
-fun KButton(
-    modifier: Modifier = Modifier,
-    content: String? = null,
-    leftIcon: Painter? = null,
-    rightIcon: Painter? = null,
-    variant: ButtonVariant,
-    enabled: Boolean = true,
-    onClick: () -> Unit,
-) {
-    KButtonLayout(
-        modifier = modifier,
-        content = content?.let { text ->
-            {
-                Text(
-                    text = text,
-                    style = variant.textStyle
-                )
-            }
-        },
-        leftIcon = leftIcon?.let { icon ->
-            {
-                Icon(
-                    painter = icon,
-                    contentDescription = content,
-                    modifier = Modifier.size(variant.iconSize),
-                    tint = variant.contentColor(enabled)
-                )
-            }
-        },
-        rightIcon = rightIcon?.let { icon ->
-            {
-                Icon(
-                    painter = icon,
-                    contentDescription = content,
-                    modifier = Modifier.size(variant.iconSize),
-                    tint = variant.contentColor(enabled)
-                )
-            }
-        },
-        variant = variant,
-        enabled = enabled,
-        onClick = onClick,
-    )
-}
-
 
 /**
  * Reusable button layout component that applies a ButtonVariant configuration.
@@ -90,41 +44,71 @@ fun KButton(
  * @param onClick Callback invoked when the button is clicked
  */
 @Composable
-internal fun KButtonLayout(
+fun KButton(
     modifier: Modifier = Modifier,
-    content: (@Composable () -> Unit)? = null,
-    leftIcon: (@Composable () -> Unit)? = null,
-    rightIcon: (@Composable () -> Unit)? = null,
+    content: String? = null,
+    leftIcon: Painter? = null,
+    rightIcon: Painter? = null,
     variant: ButtonVariant,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     enabled: Boolean = true,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    interactionSource: MutableInteractionSource? = null
 ) {
-    Button(
-        modifier = modifier,
-        onClick = { onClick() },
+    @Suppress("NAME_SHADOWING")
+    val interactionSource = interactionSource ?: remember { MutableInteractionSource() }
+    val containerColor = variant.containerColor(enabled)
+    val contentColor = variant.contentColor(enabled)
+    val border = variant.borderWidth?.let {
+        BorderStroke(it, variant.borderColor(enabled))
+    }
+    Surface(
+        onClick = onClick,
+        modifier = modifier.semantics { role = Role.Button },
         enabled = enabled,
         shape = variant.shape,
-        colors = variant.colors,
-        border = BorderStroke(1.dp, variant.borderColor),
-        contentPadding = variant.paddingValues,
-        interactionSource = interactionSource,
+        color = containerColor,
+        contentColor = contentColor,
+        border = border,
+        interactionSource = interactionSource
     ) {
         Row(
-            modifier = Modifier.height(variant.iconSize),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(variant.itemSpacing),
+            Modifier
+                .height(variant.height)
+                .padding(variant.paddingValues),
+            horizontalArrangement = Arrangement.spacedBy(
+                variant.itemSpacing,
+                Alignment.CenterHorizontally
+            ),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            leftIcon?.invoke()
-            content?.invoke()
-            rightIcon?.invoke()
+            leftIcon?.let { icon ->
+                Icon(
+                    painter = icon,
+                    contentDescription = content,
+                    modifier = Modifier.size(variant.iconSize),
+                    tint = variant.contentColor(enabled)
+                )
+            }
+
+            content?.let { text ->
+                Text(
+                    text = text,
+                    style = variant.textStyle
+                )
+            }
+
+            rightIcon?.let { icon ->
+                Icon(
+                    painter = icon,
+                    contentDescription = content,
+                    modifier = Modifier.size(variant.iconSize),
+                    tint = variant.contentColor(enabled)
+                )
+            }
         }
     }
 }
 
-@Stable
-internal fun ButtonVariant.contentColor(enabled: Boolean): Color =
-    if (enabled) colors.contentColor else colors.disabledContentColor
 
 @Preview()
 @Composable
