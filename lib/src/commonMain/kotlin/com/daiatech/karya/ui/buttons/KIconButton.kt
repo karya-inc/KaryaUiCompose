@@ -24,6 +24,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
@@ -41,7 +42,6 @@ fun KIconButton(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit,
 ) {
-
     Box(
         modifier = modifier
             .clip(variant.shape)
@@ -52,14 +52,14 @@ fun KIconButton(
                 interactionSource = interactionSource
             )
             .background(variant.containerColor(enabled))
-            .border(1.dp, variant.borderColor, variant.shape)
+            .border(1.dp, variant.borderColor(enabled), variant.shape)
             .padding(variant.paddingValues),
         contentAlignment = Alignment.Center
     ) {
         Image(
             painter = painter,
             contentDescription = null,
-            modifier = Modifier.size(variant.iconSize)
+            modifier = Modifier.size(variant.iconSize).alpha(enabled.alpha)
         )
     }
 }
@@ -67,6 +67,10 @@ fun KIconButton(
 @Stable
 internal fun IconButtonVariant.containerColor(enabled: Boolean): Color =
     if (enabled) colors.containerColor else colors.disabledContainerColor
+
+@Stable
+internal fun IconButtonVariant.borderColor(enabled: Boolean): Color =
+    if (enabled) borderColor else borderColor.copy(0.5f)
 
 
 @Preview(showBackground = true)

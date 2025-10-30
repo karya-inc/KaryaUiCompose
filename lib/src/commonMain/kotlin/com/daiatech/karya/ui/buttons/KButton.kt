@@ -1,7 +1,6 @@
 package com.daiatech.karya.ui.buttons
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,14 +13,20 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -47,19 +52,21 @@ fun KButton(
         },
         leftIcon = leftIcon?.let { icon ->
             {
-                Image(
+                Icon(
                     painter = icon,
                     contentDescription = content,
                     modifier = Modifier.size(variant.iconSize),
+                    tint = variant.contentColor(enabled)
                 )
             }
         },
         rightIcon = rightIcon?.let { icon ->
             {
-                Image(
+                Icon(
                     painter = icon,
                     contentDescription = content,
                     modifier = Modifier.size(variant.iconSize),
+                    tint = variant.contentColor(enabled)
                 )
             }
         },
@@ -115,6 +122,10 @@ internal fun KButtonLayout(
     }
 }
 
+@Stable
+internal fun ButtonVariant.contentColor(enabled: Boolean): Color =
+    if (enabled) colors.contentColor else colors.disabledContentColor
+
 @Preview()
 @Composable
 fun KButtonPreview() {
@@ -159,7 +170,8 @@ fun KButtonPreview() {
                     content = "Disabled",
                     variant = variant,
                     enabled = false,
-                    onClick = {}
+                    onClick = {},
+                    leftIcon = rememberVectorPainter(Icons.Default.Add)
                 )
             }
         }
