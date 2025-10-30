@@ -1,8 +1,10 @@
 package com.daiatech.karya.ui.buttons
+
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.ButtonColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -25,7 +27,24 @@ class ButtonVariant internal constructor(
     val itemSpacing: Dp,
     val paddingValues: PaddingValues,
     val borderColor: Color,
-)
+    val borderWidth: Dp?
+) {
+    @Stable
+    internal fun contentColor(enabled: Boolean): Color =
+        if (enabled) colors.contentColor else colors.disabledContentColor
+
+    @Stable
+    internal fun containerColor(enabled: Boolean): Color =
+        if (enabled) colors.containerColor else colors.disabledContainerColor
+
+    @Stable
+    internal fun borderColor(enabled: Boolean): Color =
+        if (enabled) borderColor else borderColor.copy(0.5f)
+
+    @Stable
+    internal val height: Dp = paddingValues.calculateTopPadding() +
+            iconSize + paddingValues.calculateBottomPadding()
+}
 
 /**
  * Immutable icon button variant configuration.
@@ -39,6 +58,7 @@ class IconButtonVariant internal constructor(
     val iconSize: Dp,
     val paddingValues: PaddingValues,
     val borderColor: Color,
+    val borderWidth: Dp?
 )
 
 /**
@@ -203,7 +223,19 @@ object IconButtonVariants {
 }
 
 private enum class ButtonColorScheme {
-    Primary, Secondary, Tertiary, Error, AccentOutline, AccentFill
+    Primary, Secondary, Tertiary, Error, AccentOutline, AccentFill;
+
+    val borderWidth
+        get() : Dp? {
+            return when (this) {
+                Primary -> null
+                Secondary -> 1.dp
+                Tertiary -> null
+                Error -> null
+                AccentOutline -> 1.dp
+                AccentFill -> null
+            }
+        }
 }
 
 private enum class ButtonSize {
@@ -232,6 +264,7 @@ private fun rememberButtonVariant(
                 iconSize = 16.dp,
                 paddingValues = PaddingValues(8.dp)
             )
+
             ButtonSize.Regular -> ButtonSizeConfig(
                 shape = shapes.medium,
                 textStyle = typography.labelLarge,
@@ -256,7 +289,8 @@ private fun rememberButtonVariant(
             iconSize = iconSize,
             itemSpacing = dimens.xxs,
             paddingValues = paddingValues,
-            borderColor = borderColor
+            borderColor = borderColor,
+            borderWidth = colorScheme.borderWidth
         )
     }
 }
@@ -280,6 +314,7 @@ private fun rememberIconButtonVariant(
                 iconSize = 16.dp,
                 paddingValues = PaddingValues(8.dp)
             )
+
             ButtonSize.Regular -> IconButtonSizeConfig(
                 shape = shapes.medium,
                 iconSize = 24.dp,
@@ -301,7 +336,8 @@ private fun rememberIconButtonVariant(
             shape = shape,
             iconSize = iconSize,
             paddingValues = paddingValues,
-            borderColor = borderColor
+            borderColor = borderColor,
+            borderWidth = colorScheme.borderWidth
         )
     }
 }
@@ -321,30 +357,35 @@ private fun rememberButtonColors(colorScheme: ButtonColorScheme): ButtonColors {
                 disabledContainerColor = theme.primary50.copy(alpha = 0.5f),
                 disabledContentColor = theme.neutral100.copy(alpha = 0.5f),
             )
+
             ButtonColorScheme.Secondary -> ButtonColors(
                 containerColor = theme.primary100,
                 contentColor = theme.primary50,
                 disabledContainerColor = theme.primary100.copy(alpha = 0.5f),
                 disabledContentColor = theme.primary50.copy(alpha = 0.5f),
             )
+
             ButtonColorScheme.Tertiary -> ButtonColors(
                 containerColor = Color.Transparent,
                 contentColor = theme.primary50,
                 disabledContainerColor = Color.Transparent,
                 disabledContentColor = theme.primary50.copy(alpha = 0.5f),
             )
+
             ButtonColorScheme.Error -> ButtonColors(
                 containerColor = theme.error50,
                 contentColor = theme.neutral100,
                 disabledContainerColor = theme.error50.copy(alpha = 0.5f),
                 disabledContentColor = theme.neutral100.copy(alpha = 0.5f),
             )
+
             ButtonColorScheme.AccentOutline -> ButtonColors(
                 containerColor = theme.neutral100,
                 contentColor = theme.neutral20,
                 disabledContainerColor = theme.neutral100.copy(alpha = 0.5f),
                 disabledContentColor = theme.neutral20.copy(alpha = 0.5f),
             )
+
             ButtonColorScheme.AccentFill -> ButtonColors(
                 containerColor = theme.tertiary50,
                 contentColor = theme.neutral100,
