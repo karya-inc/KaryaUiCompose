@@ -13,9 +13,3 @@ data class KaryaShapes(
     val large: Shape
 )
 
-val defaultKaryaShapes  = KaryaShapes(
-    small = RoundedCornerShape(4.dp),
-    medium =RoundedCornerShape(8.dp),
-    large =  RoundedCornerShape(16.dp)
-)
-

@@ -16,15 +16,3 @@ data class KaryaDimensions(
     val xxl: Dp,
     val xxxl: Dp
 )
-
-val defaultKaryaDimensions = KaryaDimensions(
-    zero = 0.dp,
-    xxs = 2.dp,
-    xs = 4.dp,
-    s = 8.dp,
-    m = 16.dp,
-    l = 24.dp,
-    xl = 32.dp,
-    xxl = 48.dp,
-    xxxl = 64.dp
-)
