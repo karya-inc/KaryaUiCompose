@@ -144,13 +144,13 @@ fun KButtonPreview() {
                     modifier = Modifier.padding(bottom = 4.dp)
                 )
                 KButton(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier,
                     content = "Enabled",
                     variant = variant,
                     onClick = {}
                 )
                 KButton(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier,
                     content = "Disabled",
                     variant = variant,
                     enabled = false,
