@@ -59,6 +59,20 @@ dependencies {
 | Desktop  | ✅ Supported |
 | Web      | ✅ Supported |
 
+## Theming
+
+### Color Schemes
+At Karya we use a single level of color variables with no aliasing and contextual levels.
+Colors constitutes of shades and tones of brand colors as well as neutrals(black and white) and semantic colors(yellow and red)  
+
+<details>
+<summary>Colors</summary>
+<img width="1024" alt="Color" src="https://github.com/user-attachments/assets/61f4646e-6886-460e-8dbb-b1c61436d1a1" />
+</details>
+
+
+
+
 ## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
