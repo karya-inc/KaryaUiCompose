@@ -19,7 +19,13 @@ import com.daiatech.karya.ui.Components
 import com.daiatech.karya.ui.bottomsheets.KBottomSheetPreview
 import com.daiatech.karya.ui.buttons.KButtonPreview
 import com.daiatech.karya.ui.buttons.KIconButtonPreview
+import com.daiatech.karya.ui.cards.OutlinedCardWithHandlePreview
+import com.daiatech.karya.ui.chips.KChipPreview
 import com.daiatech.karya.ui.dialogs.KDialogPreview
+import com.daiatech.karya.ui.loaders.KLoadingAnimationPreview
+import com.daiatech.karya.ui.text.AnnotatedStringPreview
+import com.daiatech.karya.ui.text.ResizableTextPreview
+import com.daiatech.karya.ui.textfields.KInputTextFieldPreview
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -58,6 +64,12 @@ fun ComponentScreen(
                 Components.ICON_BUTTON -> KIconButtonPreview()
                 Components.DIALOG -> KDialogPreview()
                 Components.BOTTOM_SHEET -> KBottomSheetPreview()
+                Components.LOADER -> KLoadingAnimationPreview()
+                Components.CARD_WITH_HANDLE -> OutlinedCardWithHandlePreview()
+                Components.RESIZABLE_TEXT -> ResizableTextPreview()
+                Components.CHIP -> KChipPreview()
+                Components.HTML_TEXT -> AnnotatedStringPreview()
+                Components.TEXT_INPUT_FIELD -> KInputTextFieldPreview()
             }
         }
     }
@@ -85,4 +97,41 @@ fun DialogPreview() {
 @Composable
 fun BottomSheetPreview() {
     ComponentScreen(Components.BOTTOM_SHEET, {}) {}
+}
+
+@Preview
+@Composable
+fun KLoadingAnimationPreview() {
+    ComponentScreen(Components.LOADER, {}) {}
+}
+
+@Preview
+@Composable
+fun KOutlinedCardWithHandlePreview() {
+    ComponentScreen(Components.CARD_WITH_HANDLE, {}) {}
+}
+
+@Preview
+@Composable
+fun ResizableTextPreview() {
+    ComponentScreen(Components.RESIZABLE_TEXT, {}) {}
+}
+
+
+@Preview
+@Composable
+fun KChipPreview() {
+    ComponentScreen(Components.CHIP, {}) {}
+}
+
+@Preview
+@Composable
+fun AnnotatedStringPreview() {
+    ComponentScreen(Components.HTML_TEXT, {}) {}
+}
+
+@Preview
+@Composable
+fun KInputTextFieldPreview() {
+    ComponentScreen(Components.TEXT_INPUT_FIELD, {}) {}
 }

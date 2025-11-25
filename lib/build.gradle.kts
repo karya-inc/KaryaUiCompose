@@ -57,6 +57,9 @@ kotlin {
                 implementation(compose.components.resources)
                 implementation(compose.components.uiToolingPreview)
                 implementation(libs.androidx.lifecycle.runtimeCompose.cmp)
+
+                // multiplatform replacement for Android's Html.fromHtml()
+                implementation(libs.htmlconverter)
             }
         }
     }
