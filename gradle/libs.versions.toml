@@ -3,6 +3,7 @@ android-compileSdk = "36"
 android-minSdk = "24"
 android-targetSdk = "36"
 agp = "8.11.2"
+htmlconverter = "1.1.0"
 kotlin = "2.2.20"
 coreKtx = "1.17.0"
 lifecycleRuntimeKtx = "2.9.4"
@@ -26,6 +27,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 androidx-material-icons = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-lifecycle-runtimeCompose-cmp = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-viewmodelCompose-cmp = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
+htmlconverter = { module = "be.digitalia.compose.htmlconverter:htmlconverter", version.ref = "htmlconverter" }
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieCompose" }
 
 [plugins]
