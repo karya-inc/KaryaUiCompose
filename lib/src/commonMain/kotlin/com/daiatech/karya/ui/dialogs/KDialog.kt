@@ -165,7 +165,7 @@ fun KDialogPreview() {
                         )
                     },
                     title = {
-                        Text("Information", style = KaryaTheme.typography.titleMedium)
+                        Text("Information about the dialog. This is to check paddings", style = KaryaTheme.typography.titleMedium)
                     },
                     content = {
                         Text(
