@@ -257,19 +257,21 @@ private fun rememberButtonVariant(
     val currentColorScheme = KaryaTheme.colorScheme
 
     return remember(colorScheme, size, colors, shapes, typography, dimens, currentColorScheme) {
-        val (shape, textStyle, iconSize, paddingValues) = when (size) {
+        val (shape, textStyle, iconSize, paddingValues, itemSpacing) = when (size) {
             ButtonSize.Small -> ButtonSizeConfig(
                 shape = shapes.small,
                 textStyle = typography.labelMedium,
                 iconSize = 16.dp,
-                paddingValues = PaddingValues(8.dp)
+                paddingValues = PaddingValues(8.dp),
+                itemSpacing = dimens.xs
             )
 
             ButtonSize.Regular -> ButtonSizeConfig(
                 shape = shapes.medium,
                 textStyle = typography.labelLarge,
                 iconSize = 24.dp,
-                paddingValues = PaddingValues(12.dp)
+                paddingValues = PaddingValues(12.dp),
+                itemSpacing = dimens.s
             )
         }
 
@@ -287,7 +289,7 @@ private fun rememberButtonVariant(
             shape = shape,
             textStyle = textStyle,
             iconSize = iconSize,
-            itemSpacing = dimens.xxs,
+            itemSpacing = itemSpacing,
             paddingValues = paddingValues,
             borderColor = borderColor,
             borderWidth = colorScheme.borderWidth
@@ -400,7 +402,8 @@ private data class ButtonSizeConfig(
     val shape: Shape,
     val textStyle: TextStyle,
     val iconSize: Dp,
-    val paddingValues: PaddingValues
+    val paddingValues: PaddingValues,
+    val itemSpacing: Dp
 )
 
 private data class IconButtonSizeConfig(
