@@ -27,7 +27,6 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.daiatech.karya.ui.modifiers.dashedBorder
 import com.daiatech.karya.ui.theme.KaryaTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -42,12 +41,12 @@ val defaultKChipColors
     @Composable get() = KChipColors(
         containerColor = KaryaTheme.colorScheme.tertiary95,
         contentColor = KaryaTheme.colorScheme.tertiary40,
-        disabledContainerColor = KaryaTheme.colorScheme.neutral40,
-        disabledContentColor = KaryaTheme.colorScheme.neutral90
+        disabledContainerColor = KaryaTheme.colorScheme.tertiary95.copy(alpha = 0.1f),
+        disabledContentColor = KaryaTheme.colorScheme.tertiary40.copy(alpha = 0.4f)
     )
 
 enum class BorderStyle {
-    SOLID, DASHED, NONE
+    SOLID, NONE
 }
 
 @Composable
@@ -57,11 +56,16 @@ fun KChip(
     colors: KChipColors = defaultKChipColors,
     borderStyle: BorderStyle = BorderStyle.SOLID,
     leadingPainter: Painter? = null,
-    trainingPainter: Painter? = null,
+    trailingPainter: Painter? = null,
     shape: Shape = CircleShape
 ) {
     KChip(
-        content = { Text(text) },
+        content = {
+            Text(
+                text = text,
+                style = KaryaTheme.typography.labelMedium
+            )
+                  },
         enabled = enabled,
         colors = colors,
         borderStyle = borderStyle,
@@ -74,10 +78,10 @@ fun KChip(
                 )
             }
         },
-        trainingIcon = trainingPainter?.let {
+        trailingIcon = trailingPainter?.let {
             {
                 Icon(
-                    painter = trainingPainter,
+                    painter = trailingPainter,
                     contentDescription = text
                 )
             }
@@ -93,19 +97,22 @@ fun KChip(
     colors: KChipColors = defaultKChipColors,
     borderStyle: BorderStyle = BorderStyle.SOLID,
     leadingIcon: (@Composable () -> Unit)? = null,
-    trainingIcon: (@Composable () -> Unit)? = null,
+    trailingIcon: (@Composable () -> Unit)? = null,
     shape: Shape = CircleShape
 ) {
     val contentColor = remember(colors, enabled) {
-        if (enabled) colors.contentColor else colors.containerColor
+        if (enabled) colors.contentColor else colors.disabledContentColor
     }
     val containerColor = remember(colors, enabled) {
         if (enabled) colors.containerColor else colors.disabledContainerColor
     }
+    val borderColor = remember (colors, enabled){
+        if (enabled) contentColor else contentColor.copy(alpha = 0.4f)
+    }
     Row(
         modifier = Modifier
             .height(KaryaTheme.dimens.m + KaryaTheme.dimens.xs)
-            .chipBorder(2.dp, contentColor, shape, borderStyle)
+            .chipBorder(1.dp, borderColor, shape, borderStyle)
             .background(containerColor, shape)
             .padding(
                 vertical = KaryaTheme.dimens.xs,
@@ -120,7 +127,7 @@ fun KChip(
         ) {
             leadingIcon?.invoke()
             content()
-            trainingIcon?.invoke()
+            trailingIcon?.invoke()
         }
     }
 }
@@ -133,7 +140,6 @@ private fun Modifier.chipBorder(
 ) = this.then(
     when (style) {
         BorderStyle.SOLID -> Modifier.border(width, color, shape)
-        BorderStyle.DASHED -> Modifier.dashedBorder(width, color, shape)
         BorderStyle.NONE -> Modifier
     }
 )
@@ -147,18 +153,20 @@ fun KChipPreview() {
                 KChip(text = "New Task")
                 KChip(
                     text = "New Task",
-                    borderStyle = BorderStyle.DASHED,
+                    borderStyle = BorderStyle.NONE,
+                    trailingPainter = rememberVectorPainter(Icons.AutoMirrored.Filled.List)
+                )
+                KChip(
+                    text = "New Task",
+                    borderStyle = BorderStyle.NONE,
+                    trailingPainter = rememberVectorPainter(Icons.AutoMirrored.Filled.List),
                     leadingPainter = rememberVectorPainter(Icons.AutoMirrored.Filled.List)
                 )
                 KChip(
                     text = "New Task",
-                    borderStyle = BorderStyle.NONE,
-                    trainingPainter = rememberVectorPainter(Icons.AutoMirrored.Filled.List)
-                )
-                KChip(
-                    text = "New Task",
-                    borderStyle = BorderStyle.NONE,
-                    trainingPainter = rememberVectorPainter(Icons.AutoMirrored.Filled.List),
+                    borderStyle = BorderStyle.SOLID,
+                    enabled = false,
+                    trailingPainter = rememberVectorPainter(Icons.AutoMirrored.Filled.List),
                     leadingPainter = rememberVectorPainter(Icons.AutoMirrored.Filled.List)
                 )
             }
