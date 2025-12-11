@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -20,6 +21,8 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.SheetState
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -49,7 +52,8 @@ fun KBottomSheet(
     action: (@Composable (Modifier) -> Unit)? = null,
     title: String? = null,
     imgPainter: Painter? = null,
-    onDismissRequest: () -> Unit = {}
+    onDismissRequest: () -> Unit = {},
+    sheetState: SheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 ) {
     val theme = KaryaTheme.colorScheme
     val dimensions = KaryaTheme.dimens
@@ -59,10 +63,7 @@ fun KBottomSheet(
         containerColor = theme.white,
         dragHandle = null,
         shape = RoundedCornerShape(topStart = dimensions.m, topEnd = dimensions.m),
-        sheetState = rememberModalBottomSheetState(
-            skipPartiallyExpanded = true,
-            confirmValueChange = { true }
-        )
+        sheetState = sheetState
     ) {
         Column(
             modifier = modifier.fillMaxWidth(),
@@ -71,7 +72,12 @@ fun KBottomSheet(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(shape = RoundedCornerShape(topEnd = dimensions.s, topStart = dimensions.s))
+                    .clip(
+                        shape = RoundedCornerShape(
+                            topEnd = dimensions.s,
+                            topStart = dimensions.s
+                        )
+                    )
             ) {
                 Column(
                     modifier = Modifier
@@ -93,7 +99,11 @@ fun KBottomSheet(
                             text = title,
                             color = theme.neutral20,
                             textAlign = TextAlign.Center,
-                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight(500))
+                            style = MaterialTheme.typography.titleLarge.copy(
+                                fontWeight = FontWeight(
+                                    500
+                                )
+                            )
                         )
                     }
                     if (message != null) {
@@ -106,7 +116,11 @@ fun KBottomSheet(
                     }
                     if (action != null) {
                         HorizontalDivider(
-                            Modifier.padding(start = dimensions.s, end = dimensions.s, top = dimensions.s).fillMaxWidth().border(
+                            Modifier.padding(
+                                start = dimensions.s,
+                                end = dimensions.s,
+                                top = dimensions.s
+                            ).fillMaxWidth().border(
                                 1.dp,
                                 theme.neutral99
                             )
@@ -158,16 +172,35 @@ private fun KBottomSheetPreviewInternal() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview
 fun KBottomSheetPreview() {
     KaryaTheme {
         var showBottomSheet by remember { mutableStateOf(false) }
-        KButton(
-            onClick = { showBottomSheet = true },
-            variant = ButtonVariants.primaryRegular,
-            content = "Show BottomSheet"
-        )
+        var dismissOnOutsideTap by remember { mutableStateOf(false) }
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            KButton(
+                onClick = { showBottomSheet = true },
+                variant = ButtonVariants.primaryRegular,
+                content = "Show BottomSheet"
+            )
+            Row(
+                Modifier.fillMaxWidth().padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text("Hide on outside tap")
+                Switch(
+                    checked = dismissOnOutsideTap,
+                    onCheckedChange = { dismissOnOutsideTap = it })
+            }
+        }
+
         if (showBottomSheet) {
             KBottomSheet(
                 title = "Action Required",
@@ -198,7 +231,10 @@ fun KBottomSheetPreview() {
                         )
                     }
                 },
-                onDismissRequest = { showBottomSheet = false }
+                onDismissRequest = { showBottomSheet = false },
+                sheetState = rememberModalBottomSheetState(
+                    skipPartiallyExpanded = true,
+                    confirmValueChange = { dismissOnOutsideTap })
             )
         }
     }
