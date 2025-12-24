@@ -65,7 +65,7 @@ fun KChip(
                 text = text,
                 style = KaryaTheme.typography.labelMedium
             )
-                  },
+        },
         enabled = enabled,
         colors = colors,
         borderStyle = borderStyle,
@@ -106,12 +106,12 @@ fun KChip(
     val containerColor = remember(colors, enabled) {
         if (enabled) colors.containerColor else colors.disabledContainerColor
     }
-    val borderColor = remember (colors, enabled){
+    val borderColor = remember(colors, enabled) {
         if (enabled) contentColor else contentColor.copy(alpha = 0.4f)
     }
     Row(
         modifier = Modifier
-            .height(KaryaTheme.dimens.m + KaryaTheme.dimens.xs)
+            .height(KaryaTheme.dimens.m + KaryaTheme.dimens.xs.times(2))
             .chipBorder(1.dp, borderColor, shape, borderStyle)
             .background(containerColor, shape)
             .padding(
