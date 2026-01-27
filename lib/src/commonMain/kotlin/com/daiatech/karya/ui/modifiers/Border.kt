@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.daiatech.karya.ui.theme.KaryaTheme
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 fun Modifier.dashedBorder(
     strokeWidth: Dp,

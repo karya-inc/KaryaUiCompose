@@ -33,7 +33,7 @@ import androidx.compose.ui.window.DialogProperties
 import com.daiatech.karya.ui.buttons.ButtonVariants
 import com.daiatech.karya.ui.buttons.KButton
 import com.daiatech.karya.ui.theme.KaryaTheme
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun KDialog(

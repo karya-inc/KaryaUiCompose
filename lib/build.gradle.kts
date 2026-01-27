@@ -39,14 +39,19 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(compose.runtime)
-                implementation(compose.foundation)
-                implementation(compose.ui)
-                implementation(compose.material3)
-                implementation(compose.materialIconsExtended)
-                implementation(compose.components.resources)
-                implementation(compose.components.uiToolingPreview)
-                implementation(libs.androidx.lifecycle.runtimeCompose.cmp)
+                // Compose
+                implementation(libs.jetbrains.compose.runtime)
+                implementation(libs.jetbrains.compose.foundation)
+                implementation(libs.jetbrains.compose.ui)
+                implementation(libs.jetbrains.compose.components.resources)
+                implementation(libs.jetbrains.compose.ui.tooling.preview)
+
+                // Material
+                implementation(libs.jetbrains.compose.material3)
+                implementation(libs.jetbrains.compose.material.icons.extended)
+
+                // Lifecycle
+                implementation(libs.jetbrains.lifecycle.runtimeCompose.cmp)
 
                 // multiplatform replacement for Android's Html.fromHtml()
                 implementation(libs.htmlconverter)
@@ -59,6 +64,10 @@ compose.resources {
     publicResClass = true
     packageOfResClass = "com.daiatech.karya.ui"
     generateResClass = auto
+}
+
+dependencies {
+    androidRuntimeClasspath(libs.jetbrains.compose.ui.tooling)
 }
 
 group = "io.github.karya-inc"
