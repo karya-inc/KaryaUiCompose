@@ -26,7 +26,7 @@ import com.daiatech.karya.ui.loaders.KLoadingAnimationPreview
 import com.daiatech.karya.ui.text.AnnotatedStringPreview
 import com.daiatech.karya.ui.text.ResizableTextPreview
 import com.daiatech.karya.ui.textfields.KInputTextFieldPreview
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

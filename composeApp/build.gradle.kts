@@ -40,17 +40,22 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.materialIconsExtended)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodelCompose.cmp)
-            implementation(libs.androidx.lifecycle.runtimeCompose.cmp)
+            implementation(libs.jetbrains.compose.runtime)
+            implementation(libs.jetbrains.compose.foundation)
+            implementation(libs.jetbrains.compose.ui)
+            implementation(libs.jetbrains.compose.components.resources)
+            implementation(libs.jetbrains.compose.ui.tooling.preview)
 
-            implementation("org.jetbrains.androidx.navigation:navigation-compose:2.9.1")
+            // Material
+            implementation(libs.jetbrains.compose.material3)
+            implementation(libs.jetbrains.compose.material.icons.extended)
+
+            // Lifecycle
+            implementation(libs.jetbrains.lifecycle.viewmodelCompose.cmp)
+            implementation(libs.jetbrains.lifecycle.runtimeCompose.cmp)
+
+            // Navigation
+            implementation(libs.jetbrains.navigation.compose)
 
             implementation(project(":lib"))
         }
@@ -73,4 +78,8 @@ compose.resources {
     publicResClass = true
     packageOfResClass = "com.daiatech.karya.resources"
     generateResClass = auto
+}
+
+dependencies {
+    androidRuntimeClasspath(libs.jetbrains.compose.ui.tooling)
 }

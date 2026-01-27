@@ -19,7 +19,7 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.unit.dp
 import com.daiatech.karya.ui.spacers.VerticalSpacer
 import com.daiatech.karya.ui.theme.KaryaTheme
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ResizableText(

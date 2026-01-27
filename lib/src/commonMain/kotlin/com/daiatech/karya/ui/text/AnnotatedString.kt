@@ -11,7 +11,7 @@ import androidx.compose.ui.text.AnnotatedString
 import be.digitalia.compose.htmlconverter.htmlToAnnotatedString
 import com.daiatech.karya.ui.spacers.VerticalSpacer
 import com.daiatech.karya.ui.theme.KaryaTheme
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import kotlin.collections.get
 import kotlin.text.replace
 
