@@ -59,6 +59,12 @@ kotlin {
 
             implementation(project(":lib"))
         }
+
+        jvmMain {
+            dependencies {
+                implementation(compose.desktop.macos_arm64)
+            }
+        }
     }
 }
 
