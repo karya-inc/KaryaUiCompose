@@ -33,3 +33,4 @@ plugins {
 rootProject.name = "KaryaUiCompose"
 include(":composeApp")
 include(":lib")
+include(":androidApp")
