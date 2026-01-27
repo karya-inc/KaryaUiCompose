@@ -13,19 +13,9 @@ plugins {
 
 kotlin {
 
-    androidLibrary {
+    android {
         namespace = "com.daiatech.karya.ui"
-        compileSdk = 36
-        minSdk = 21
-
-        withHostTestBuilder {
-        }
-
-        withDeviceTestBuilder {
-            sourceSetTreeName = "test"
-        }.configure {
-            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        }
+        compileSdk { version = release(36) }
     }
 
     jvm()

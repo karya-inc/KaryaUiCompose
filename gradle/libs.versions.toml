@@ -2,9 +2,9 @@
 android-compileSdk = "36"
 android-minSdk = "24"
 android-targetSdk = "36"
-agp = "8.11.2"
+agp = "9.0.0"
 htmlconverter = "1.1.0"
-kotlin = "2.2.20"
+kotlin = "2.3.0"
 coreKtx = "1.17.0"
 lifecycleRuntimeKtx = "2.9.4"
 activityCompose = "1.11.0"
@@ -12,7 +12,7 @@ composeBom = "2025.09.00"
 ktlint = "13.1.0"
 lottieCompose = "6.6.9"
 composeHotReload = "1.0.0-beta08"
-composeMultiplatform = "1.9.0"
+composeMultiplatform = "1.10.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,7 +32,6 @@ lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 android-library = { id = "com.android.library", version.ref = "agp" }
