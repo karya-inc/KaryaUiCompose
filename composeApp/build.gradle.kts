@@ -1,5 +1,3 @@
-import com.android.build.api.dsl.androidLibrary
-import org.gradle.kotlin.dsl.configure
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
@@ -12,19 +10,10 @@ plugins {
 }
 
 kotlin {
-    androidLibrary {
+
+    android {
         namespace = "com.daiatech.karya.ui.app"
-        compileSdk = 36
-        minSdk = 21
-
-        withHostTestBuilder {
-        }
-
-        withDeviceTestBuilder {
-            sourceSetTreeName = "test"
-        }.configure {
-            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        }
+        compileSdk { version = release(36) }
     }
 
     listOf(
