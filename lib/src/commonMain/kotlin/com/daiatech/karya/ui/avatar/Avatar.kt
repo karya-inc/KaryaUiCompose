@@ -11,7 +11,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -46,7 +48,8 @@ private val AvatarSize = 120.dp
  * - A speech bubble in the top-start corner containing an animated audio waveform, indicating
  *   that the avatar is currently speaking.
  *
- * The total layout size is `avatarSize + 32.dp` to accommodate the glow ring.
+ * The total layout size is `avatarSize * (152 / 120)` to accommodate the glow ring, which scales
+ * proportionally with `avatarSize`.
  *
  * @param isActive Whether the avatar is in the active (speaking) state.
  * @param avatarVector The [ImageVector] to display as the avatar image.
@@ -66,18 +69,22 @@ fun AvatarComponent(
     avatarSize: Dp = AvatarSize,
     contentDescription: String? = "Avatar",
 ) {
+    val ringPadding = avatarSize * (16f / 120f)
+    val containerSize = avatarSize + ringPadding * 2
     Box(
-        modifier = modifier.size(avatarSize + 32.dp),
+        modifier = modifier.size(containerSize),
         contentAlignment = Alignment.Center
     ) {
         if (isActive) {
+            val ringBorder = avatarSize * (8f / 120f)
+            val ringBlur = avatarSize * (12f / 120f)
             Box(
                 Modifier
-                    .size(avatarSize + 32.dp)
+                    .size(containerSize)
                     .clip(CircleShape)
-                    .blur(12.dp)
-                    .padding(16.dp)
-                    .border(8.dp, accentColor, CircleShape)
+                    .blur(ringBlur)
+                    .padding(ringPadding)
+                    .border(ringBorder, accentColor, CircleShape)
             )
         }
 
@@ -97,20 +104,22 @@ fun AvatarComponent(
         )
 
         if (isActive) {
+            val bubbleSize = avatarSize * 0.4f
             Box(
                 Modifier
-                    .size(48.dp)
+                    .size(bubbleSize)
                     .align(Alignment.TopStart)
-                    .offset(y = avatarSize / 2 - 32.dp)
+                    .offset(x = ringPadding - bubbleSize / 3f, y = ringPadding + avatarSize * 0.1f)
             ) {
                 Image(
                     imageVector = messageBubble,
-                    modifier = Modifier.size(48.dp),
+                    modifier = Modifier.size(bubbleSize),
                     contentDescription = null
                 )
                 AudioBars(
                     barColor = Color(0xFFBBBBBB),
-                    modifier = Modifier.height(16.dp).offset(x = 12.dp, y = 8.dp)
+                    bubbleSize = bubbleSize,
+                    modifier = Modifier.offset(x = bubbleSize * 0.25f, y = bubbleSize / 6f)
                 )
             }
         }
@@ -118,13 +127,17 @@ fun AvatarComponent(
 }
 
 @Composable
-private fun AudioBars(barColor: Color, modifier: Modifier = Modifier) {
+private fun AudioBars(barColor: Color, bubbleSize: Dp, modifier: Modifier = Modifier) {
+    val barWidth = bubbleSize / 12f
+    val barHeight = bubbleSize / 3f
+    val barSpacing = bubbleSize / 12f
+
     val transition = rememberInfiniteTransition(label = "audio_bars")
     val h0 by transition.animateFloat(
         initialValue = 0.15f,
         targetValue = 0.35f,
         animationSpec = infiniteRepeatable(
-            animation = tween(450, easing = FastOutSlowInEasing, delayMillis = 0),
+            animation = tween(450, easing = FastOutSlowInEasing),
             repeatMode = RepeatMode.Reverse
         ),
         label = "barH_0"
@@ -149,28 +162,28 @@ private fun AudioBars(barColor: Color, modifier: Modifier = Modifier) {
     )
 
     Row(
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        horizontalArrangement = Arrangement.spacedBy(barSpacing),
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
     ) {
         listOf(h0, h1, h2).forEach { heightFraction ->
-            AudioBar(accentColor = barColor, heightFraction = heightFraction)
+            AudioBar(accentColor = barColor, width = barWidth, maxHeight = barHeight, heightFraction = heightFraction)
         }
     }
 }
 
 @Composable
-private fun AudioBar(accentColor: Color, heightFraction: Float) {
+private fun AudioBar(accentColor: Color, width: Dp, maxHeight: Dp, heightFraction: Float) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
-            .width(4.dp)
-            .height(16.dp)
+            .width(width)
+            .height(maxHeight)
     ) {
         Box(
             modifier = Modifier
-                .width(4.dp)
-                .height(16.dp * heightFraction)
+                .width(width)
+                .height(maxHeight * heightFraction)
                 .background(accentColor, RoundedCornerShape(50))
         )
     }
@@ -193,6 +206,24 @@ private fun ActivePreview() {
     Surface(color = Color(0xFFE8FAF4)) {
         Box(Modifier.padding(32.dp), contentAlignment = Alignment.Center) {
             AvatarComponent(isActive = true, avatarVector = avatarLogo)
+        }
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFE8FAF4)
+@Composable
+private fun ActiveLargePreview() {
+    Surface(color = Color(0xFFE8FAF4)) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            AvatarComponent(
+                isActive = true,
+                avatarVector = avatarLogo,
+                avatarSize = 200.dp
+            )
         }
     }
 }
