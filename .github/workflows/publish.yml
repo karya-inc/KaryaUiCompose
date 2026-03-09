@@ -53,7 +53,7 @@ jobs:
 
       - name: Build Signed APK
         run: |
-          ./gradlew :composeApp:assembleRelease \
+          ./gradlew :androidApp:assembleRelease \
           -Pandroid.injected.signing.store.file=${{ github.workspace }}/composeApp/release.keystore \
           -Pandroid.injected.signing.store.password=${{ secrets.ANDROID_KEYSTORE_PASSWORD }} \
           -Pandroid.injected.signing.key.alias=${{ secrets.ANDROID_KEY_ALIAS }} \
@@ -61,7 +61,7 @@ jobs:
 
       - name: Find APK
         run: |
-          APK_PATH=$(find "${{ github.workspace }}/composeApp/build/outputs/apk/release" -name "*.apk" | head -n 1)
+          APK_PATH=$(find "${{ github.workspace }}/androidApp/build/outputs/apk/release" -name "*.apk" | head -n 1)
           if [ -z "$APK_PATH" ]; then
               echo "❌ APK not found! Release failed."
               exit 1
